@@ -1,9 +1,6 @@
 // BEGIN_INTERNALS
 /*
-DIR: code code\defines code\defines\obj code\game code\game\gamemodes code\game\objects code\game\objects\items code\game\objects\items\weapons code\modules code\modules\cargo code\modules\clothing code\modules\clothing\head code\modules\clothing\under code\modules\clothing\under\jobs code\modules\projectiles code\modules\projectiles\ammunition code\modules\projectiles\guns code\modules\projectiles\guns\energy code\modules\projectiles\guns\projectile code\modules\research 
-AUTO_FILE_DIR: OFF
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\mob\living\carbon\human\species\outsider\skeleton.dm;code\modules\organs\organ_alien.dm;code\modules\organs\subtypes\xenos.dm;code\game\objects\items\weapons\melee\energy.dm;code\game\objects\items\weapons\material\swords.dm;code\modules\mob\living\silicon\robot\robot_modules.dm;code\modules\projectiles\guns\projectile\svd.dm;code\modules\projectiles\guns\projectile\boltaction.dm;code\modules\projectiles\guns\energy\special.dm;code\modules\research\designs.dm;code\modules\projectiles\guns\projectile\automatic.dm;code\modules\projectiles\ammunition\boxes.dm;code\modules\projectiles\guns\projectile\pistol.dm;code\modules\clothing\head\misc_special.dm;code\modules\clothing\under\jobs\security.dm;code\modules\clothing\head\helmet.dm;code\modules\projectiles\ammunition\bullets.dm
-FILE: code\modules\projectiles\ammunition\boxes.dm
+AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
