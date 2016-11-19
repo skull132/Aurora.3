@@ -62,6 +62,10 @@
 #define HEAVY 64
 #define ALLMOBS (HUMAN|MONKEY|ALIEN|ROBOT|SLIME|SIMPLE_ANIMAL|HEAVY)
 
+//Types of diona, returned by is_diona
+#define DIONA_NYMPH		1
+#define DIONA_WORKER	2
+
 // Robot AI notifications
 #define ROBOT_NOTIFICATION_NEW_UNIT 1
 #define ROBOT_NOTIFICATION_NEW_NAME 2
