@@ -187,7 +187,7 @@ datum/ghosttrap/drone/transfer_personality(var/mob/candidate, var/mob/living/sil
 		return 0
 	drone.transfer_personality(candidate.client)
 
-***********************************
+/***********************************
 * Syndicate Cyborg *
 ***********************************/
 /datum/ghosttrap/syndicateborg
