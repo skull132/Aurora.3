@@ -301,5 +301,5 @@
 	if(hat)
 		return
 	hat = new_hat
-	new_hat.loc = src
+	new_hat.forceMove(src)
 	update_icons()

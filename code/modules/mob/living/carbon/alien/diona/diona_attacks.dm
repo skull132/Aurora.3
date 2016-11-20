@@ -8,10 +8,11 @@
 		get_scooped(M)
 	..()
 
-#TODO-MERGE: Test nymph hats
+//#TODO-MERGE: Test nymph hats
 /mob/living/carbon/alien/diona/MouseDrop(atom/over_object)
 	var/mob/living/carbon/H = over_object
-	if(!istype(H) || !Adjacent(H)) return ..()
+	if(!istype(H) || !Adjacent(H))
+		return ..()
 	if(H.a_intent == I_HELP)
 		if(H.species && H.species.name == "Diona" && do_merge(H))
 			return
