@@ -289,7 +289,7 @@
 	if (istype(location, /turf))
 		location.hotspot_expose(700, 5)
 
-/obj/item/weapon/weldingtool/attack(mob/M as mob, mob/user as mob)
+/obj/item/weapon/weldingtool/attack(mob/living/M as mob, mob/user as mob)
 
 	if(hasorgans(M))
 
@@ -299,11 +299,9 @@
 		if(!(S.status & ORGAN_ROBOT) || user.a_intent != I_HELP)
 			return ..()
 
-		if(istype(M,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			if(H == user)
-				user << "<span class='warning'>You can't repair damage to your own body - it's against OH&S.</span>"
-				return
+		if(M.isSynthetic() && M == user)
+			user << "<span class='warning'>You can't repair damage to your own body - it's against OH&S.</span>"
+			return
 		if(S.brute_dam == 0)
 			// Organ undamaged
 			user << "Nothing to fix here!"
@@ -315,7 +313,7 @@
 		if (src.remove_fuel(0))
 			// Use a bit of fuel and repair
 			S.heal_damage(15,0,0,1)
-			user.visible_message("<span class='warning'>\The [user] patches some dents on \the [H]'s [S.name] with \the [src].</span>")
+			user.visible_message("<span class='warning'>\The [user] patches some dents on \the [M]'s [S.name] with \the [src].</span>")
 		else
 			// Welding tool is out of fuel
 			user << "Need more welding fuel!"
