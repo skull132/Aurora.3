@@ -301,10 +301,9 @@
 
 		if(istype(M,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
-			if(H.species.flags & IS_SYNTHETIC)
-				if(M == user)
-					user << "<span class='warning'>You can't repair damage to your own body - it's against OH&S.</span>"
-					return
+			if(H == user)
+				user << "<span class='warning'>You can't repair damage to your own body - it's against OH&S.</span>"
+				return
 		if(S.brute_dam == 0)
 			// Organ undamaged
 			user << "Nothing to fix here!"
@@ -316,7 +315,7 @@
 		if (src.remove_fuel(0))
 			// Use a bit of fuel and repair
 			S.heal_damage(15,0,0,1)
-			user.visible_message("<span class='warning'>\The [user] patches some dents on \the [M]'s [S.name] with \the [src].</span>")
+			user.visible_message("<span class='warning'>\The [user] patches some dents on \the [H]'s [S.name] with \the [src].</span>")
 		else
 			// Welding tool is out of fuel
 			user << "Need more welding fuel!"
