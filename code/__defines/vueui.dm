@@ -5,8 +5,7 @@
 #define THEME_TYPE_DARK 1
 #define THEME_TYPE_LIGHT 0
 
-#define VUEUI_MONITOR_VARS(type, monitor_name)                   \
-/datum/vueui_var_monitor/##monitor_name { subject_type = type; } \
-                                                                 \
-/datum/vueui_var_monitor/##monitor_name/populate_var_holders()   \
-	. = ..()
+#define VUEUI_MONITOR_VARS(type, monitor_name)                    \
+/datum/vueui_var_monitor/##monitor_name { subject_type = type; }; \
+                                                                  \
+/datum/vueui_var_monitor/##monitor_name/populate_var_holders(. = list())
