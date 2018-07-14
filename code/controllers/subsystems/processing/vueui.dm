@@ -5,7 +5,6 @@ Byond Vue UI framework's management subsystem
 */
 /datum/controller/subsystem/processing/vueui
 	name = "VueUI"
-	flags = SS_NO_INIT
 	priority = SS_PRIORITY_NANOUI
 	stat_tag = "O"
 
