@@ -15,16 +15,21 @@
 	. = list()
 
 /datum/vueui_var_monitor/proc/update_data(datum/ui_source, list/data, mob/user, datum/vueui/ui)
+	var/modified = FALSE
 	for (var/_iter in var_holders)
 		var/datum/vueui_var_holder/VH = _iter
 
 		if (VH.need_to_replace(ui_source.vars[VH.source_key], data[VH.data_key], user, ui))
+			modified = TRUE
 			if (VH.sanitizer)
 				data[VH.data_key] = VH.sanitizer.Invoke(ui_source.vars[VH.source_key], data[VH.data_key], user, ui)
 			else
 				data[VH.data_key] = ui_source.vars[VH.source_key]
 
-	return data
+	if (modified)
+		return data
+	else
+		return null
 
 /datum/vueui_var_holder
 	var/source_key
