@@ -55,3 +55,9 @@
 
 /datum/vueui_var_holder/comparator_based/need_to_replace(source, item, mob/user, datum/vueui/ui)
 	return comparator.Invoke(source, item, user, ui)
+
+// Functions that should make our lives easier
+/datum/vueui_var_transform/proc/to_boolean(invert, source, current)
+	if (invert)
+		return !source
+	return !!source
