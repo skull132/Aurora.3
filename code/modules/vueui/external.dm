@@ -22,6 +22,7 @@
 
 	var/datum/vueui_var_monitor/VM = SSvueui.get_var_monitor(src)
 	if (VM)
+		LAZYINITLIST(newdata)
 		. = VM.update_data(src, newdata.Copy(), user, ui)
 
 /mob/var/list/open_vueui_uis
