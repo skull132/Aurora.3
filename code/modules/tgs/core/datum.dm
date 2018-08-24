@@ -11,6 +11,8 @@ TGS_PROTECT_DATUM(/datum/tgs_api)
 	return TGS_UNIMPLEMENTED
 
 /datum/tgs_api/proc/OnWorldNew(datum/tgs_event_handler/event_handler)
+	log_debug("Stub called aaa.")
+	crash_with("Stub called aaa.")
 	return TGS_UNIMPLEMENTED
 
 /datum/tgs_api/proc/OnInitializationComplete()

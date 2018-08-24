@@ -59,6 +59,8 @@
 /datum/tgs_api/v3210/OnWorldNew(datum/tgs_event_handler/event_handler)	//don't use event handling in this version
 	. = FALSE
 
+	log_debug("Non-stub called.")
+
 	comms_key = world.params[SERVICE_WORLD_PARAM]
 	instance_name = world.params[SERVICE_INSTANCE_PARAM]
 	if(!instance_name)
@@ -77,6 +79,8 @@
 		return
 	ListServiceCustomCommands(TRUE)
 	ExportService("[SERVICE_REQUEST_API_VERSION] [ApiVersion()]", TRUE)
+
+	log_debug("Non-stub exited TRUE.")
 	return TRUE
 
 //nothing to do for v3
