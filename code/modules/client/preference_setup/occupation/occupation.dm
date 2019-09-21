@@ -163,8 +163,8 @@
 				dat += " <font color=green>\[Yes]</font>"
 			else
 				dat += " <font color=red>\[No]</font>"
-//			if(job.has_alt_titles()) //Blatantly cloned from a few lines down.
-//				dat += "</a></td></tr><tr bgcolor='[lastJob.selection_color]'><td width='60%' align='center'>&nbsp</td><td><a href='?src=\ref[src];select_alt_title=\ref[job]'>\[[pref.GetPlayerAltTitle(job)]\]</a></td></tr>"
+			if(job.has_alt_titles()) //Blatantly cloned from a few lines down.
+				dat += "</a></td></tr><tr bgcolor='[lastJob.selection_color]'><td width='60%' align='center'>&nbsp</td><td><a href='?src=\ref[src];select_alt_title=\ref[job]'>\[[GetSelectedAltTitle(job)]\]</a></td></tr>"
 			dat += "</a></td></tr>"
 			continue
 
@@ -177,7 +177,8 @@
 		else
 			dat += " <font color=red>\[NEVER]</font>"
 
-		// FIGURE OUT ALT TITLES HERE.
+		if(job.has_alt_titles()) //Blatantly cloned from a few lines down.
+			dat += "</a></td></tr><tr bgcolor='[lastJob.selection_color]'><td width='60%' align='center'>&nbsp</td><td><a href='?src=\ref[src];select_alt_title=\ref[job]'>\[[GetSelectedAltTitle(job)]\]</a></td></tr>"
 
 		dat += "</a></td></tr>"
 
@@ -210,16 +211,15 @@
 			pref.alternate_option = 0
 		return TOPIC_REFRESH
 
-/*
+
 	else if(href_list["select_alt_title"])
 		var/datum/job/job = locate(href_list["select_alt_title"])
-		if (job)
-			var/choices = list(job.title) + job.alt_titles
-			var/choice = input("Choose an title for [job.title].", "Choose Title", pref.GetPlayerAltTitle(job)) as anything in choices|null
-			if(choice && CanUseTopic(user))
-				SetPlayerAltTitle(job, choice)
+		if (istype(job))
+			var/list/choices = GetAltJobChoices(job)
+			var/choice = input("Choose an title for [job.title].", "Choose Title", GetSelectedAltTitle(job)) as anything in choices|null
+			if(choices[choice] && CanUseTopic(user))
+				SetPlayerAltTitle(job, choices[choice])
 				return TOPIC_REFRESH
-*/
 
 	else if(href_list["set_job"])
 		if(SetJob(user, href_list["set_job"]))
@@ -243,10 +243,6 @@
 		to_client_chat("<span class='danger'>Your faction selection has been reset to [pref.faction].</span>")
 		to_client_chat("<span class='danger'>Your jobs have been reset due to this!</span>")
 		ResetJobs()
-
-/datum/category_item/player_setup_item/occupation/proc/SetPlayerAltTitle(datum/job/job, new_title)
-	//TO MEME
-	return
 
 /datum/category_item/player_setup_item/occupation/proc/SetJob(mob/user, role)
 	var/datum/job/job = SSjobs.GetJob(role)
@@ -332,8 +328,38 @@
 
 	to_client_chat("<span class='notice'>New faction chosen. Job preferences reset.</span>")
 
+/datum/category_item/player_setup_item/occupation/proc/GetSelectedAltTitle(datum/job/job)
+	if (job.type in pref.job_preferences)
+		return job.title
+
+	for (var/datum/job/sub_job in job.alternative_jobs)
+		if (sub_job.type in pref.job_preferences)
+			return sub_job.title
+
+	return job.title
+
+/datum/category_item/player_setup_item/occupation/proc/GetAltJobChoices(datum/job/job)
+	. = list(job.title = job)
+
+	for (var/datum/job/J in job.alternative_jobs)
+		.[J.title] = J
+
+/datum/category_item/player_setup_item/occupation/proc/SetPlayerAltTitle(datum/job/job, datum/job/new_title)
+	pref.job_preferences -= job.type
+
+	for (var/datum/job/J in job.alternative_jobs)
+		pref.job_preferences -= J.type
+
+	pref.job_preferences += new_title.type
+
 /datum/preferences/proc/HasJobSelected(datum/job/job, level)
 	if (!job || !level)
 		return FALSE
+
+	if (job.has_alt_titles())
+		for (var/datum/job/J in job.alternative_jobs)
+			if (job_preferences[J.type])
+				job = J
+				break
 
 	return job_preferences[job.type] == level

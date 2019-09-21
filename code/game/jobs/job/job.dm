@@ -108,6 +108,9 @@
 	else
 		. = access.Copy()
 
+/datum/job/proc/has_alt_titles()
+	return !!LAZYLEN(alternative_jobs)
+
 /**
  * Checks if the job has open positions.
  *
