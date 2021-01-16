@@ -322,6 +322,8 @@ var/list/gamemode_cache = list()
 
 	var/lore_summary
 
+	var/force_voters_ready = FALSE
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)
@@ -974,6 +976,9 @@ var/list/gamemode_cache = list()
 
 				if("lore_summary")
 					lore_summary = value
+
+				if ("force_voters_ready")
+					force_voters_ready = TRUE
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
